@@ -1,0 +1,24 @@
+/* .links a[target] {
+  color: red;
+} */
+
+/* .links a[href="https://unicode.vn"]
+{
+  color: red;
+} */
+
+/* .links a[href*="unicode.vn"] {
+  color: red;
+} */
+
+/* .links a[title^="Web"] {
+  color: red;
+} */
+
+/* .links a[href$=".net"] {
+  color: red;
+} */
+
+.links a[title~="Web"] {
+  color: red;
+}

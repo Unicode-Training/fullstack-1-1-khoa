@@ -1,0 +1,32 @@
+/* #content {
+  color: red;
+}
+.text {
+  color: green;
+}
+h1 {
+  color: blueviolet;
+} */
+
+/* .content > div > div > h2 {
+  color: red;
+}
+.element > h2 {
+  color: blueviolet;
+}
+
+.menu > li > a {
+  color: red;
+} */
+
+/* h2.item.large {
+  color: red;
+}
+h2.large.link {
+  color: green;
+} */
+
+.text,
+.menu {
+  background: yellow;
+}

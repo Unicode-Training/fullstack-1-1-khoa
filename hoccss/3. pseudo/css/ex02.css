@@ -1,0 +1,100 @@
+/* h1:hover {
+  color: red;
+}
+h1:active {
+  color: green;
+} */
+/* .btn:focus {
+  background: green;
+}
+input:focus {
+  background: green;
+}
+p:focus {
+  color: red;
+}
+p:active {
+  color: green;
+} */
+
+/* ul .item:first-child {
+  color: red;
+}
+ul .item:last-child {
+  color: green;
+} */
+
+/* ul .item:first-of-type {
+  color: red;
+}
+ul .item:last-of-type {
+  color: green;
+} */
+
+/* ul .item:nth-of-type(3n + 3) {
+  color: green;
+} */
+
+/* ul .item:not(.active, .active2) {
+  color: red;
+} */
+
+/* ul .item:not(.active):not(.active2) {
+  color: red;
+} */
+
+/*
+Bài tập: focus vào thẻ input thì sẽ làm các công việc sau
+- Đổi màu nền sẽ màu vàng
+- Đổi placeholder sang màu đỏ
+*/
+
+/* .field-item:focus {
+  background: yellow;
+}
+.field-item:focus::placeholder {
+  color: red;
+}
+.field-item:read-only::placeholder {
+  color: green;
+}
+.field-item:disabled::placeholder {
+  color: blue;
+} */
+
+/* .input-group input:focus + span {
+  color: red;
+}
+.input-group input:valid + span {
+  color: red;
+} */
+
+/* .text-red:focus,
+.text-red:focus ~ .content {
+  color: red;
+}
+.text-green:focus,
+.text-green:focus ~ .content {
+  color: green;
+}
+.text-blue:focus,
+.text-blue:focus ~ .content {
+  color: blue;
+} */
+
+#red:checked ~ .content,
+#red:checked ~ nav label[for="red"] {
+  color: red;
+}
+#green:checked ~ .content,
+#green:checked ~ nav label[for="green"] {
+  color: green;
+}
+#blue:checked ~ .content,
+#blue:checked ~ nav label[for="blue"] {
+  color: blue;
+}
+
+nav {
+  background: yellowgreen;
+}

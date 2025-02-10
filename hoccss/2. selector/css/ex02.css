@@ -1,0 +1,24 @@
+/* ul ~ p {
+  color: red;
+}
+
+ul ~ div p {
+  color: red;
+} */
+
+/* .box p + h2,
+.box p + h2 + h2 {
+  color: red;
+} */
+
+/* .box h2 + h2 {
+  color: red;
+} */
+
+/* ul li input:checked + span {
+  color: red;
+} */
+
+input:checked + .content {
+  display: none;
+}
