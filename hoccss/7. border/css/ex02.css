@@ -1,0 +1,52 @@
+body {
+  color: red;
+}
+.box {
+  border: 5px solid red;
+  /* border-radius: 10px 20px 30px 40px; */
+  /* border-top-left-radius: 10px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 40px; */
+}
+.circle {
+  width: 100px;
+  height: 100px;
+  background: red;
+  border-radius: 50%;
+}
+.btn {
+  width: 100px;
+  height: 30px;
+  background: green;
+  border: 0;
+  color: #fff;
+  border-radius: 99px;
+  cursor: pointer;
+}
+.btn:hover {
+  background: initial;
+  color: inherit;
+  border: 1px solid currentColor;
+}
+.btn-sm {
+  width: 80px;
+  height: 25px;
+}
+.btn-lg {
+  width: 150px;
+  height: 45px;
+}
+.btn-outline {
+  color: rgb(255, 0, 0);
+  border: 1px solid currentColor;
+  border-radius: 99px;
+  width: 100px;
+  height: 40px;
+  background: transparent;
+  cursor: pointer;
+}
+.btn-outline:hover {
+  background: rgb(255, 119, 0);
+  color: #fff;
+}

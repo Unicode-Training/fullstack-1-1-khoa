@@ -214,3 +214,164 @@ Lưu ý:
 - disabled: Khi trong form có thuộc tính disabled
 
 - read-only: Khi trong form có thuộc tính readonly
+
+## Các thuộc tính định dạng text
+
+### Đơn vị trong CSS
+
+1. Đơn vị tuyệt đối
+
+- px --> Điểm ảnh trên màn hình
+- pt --> 1.3 x px
+
+2. Đơn vị tương đối
+
+- em --> Tỷ lệ theo font-size với phần tử cha (`xem = x * font-size`)
+- rem --> Tỷ lệ theo font-size mặc định của trình duyệt
+- % --> Tỷ lệ theo thuộc tính đang xử lý của phần tử cha
+- vw --> viewport width: Khung hiển chiều rộng của trình duyệt
+- vh --> viewport height: Khung hiển thị chiều ngang của trình duyệt
+
+### Thuộc tính color
+
+Cú pháp: color: mamau|tenmau
+Tác dụng: Đổi màu văn bản
+
+- tenmau: Tên màu Tiếng Anh (red, green,...)
+- mamau:
+
+* hexa
+* rgb
+* hsl
+
+Lưu ý:
+
+- Thuộc tính color là thuộc tính kế thừa
+- Color Opacity
+
+### Thuộc tính font-size
+
+Tác dụng: Thay đổi cỡ chữ của văn bản
+
+Cú pháp: font-size: giatri + donvi
+
+### Thuộc tính line-height
+
+Tác dụng: Tùy biến chiều cao của dòng (giãn dòng)
+
+Cú pháp: line-height: giatri
+
+Tỷ lệ theo font-size của chính nó
+
+### Thuộc tính font-family
+
+Tác dụng: Thiết lập font chữ cho văn bản
+
+Cú pháp: font-family: tenfont1, tenfont2, tenfont3,...
+
+Tên font chia 2 loại
+
+- Font mặc định của máy tính
+- Font được nạp vào trang web (@font-face)
+
+Nạp font vào trang web
+
+1. Nạp Local
+
+Lấy file font đưa vào project
+
+2. Nạp qua CDN
+
+Lấy link css từ các thư viện
+
+Họ font mặc định
+
+- sans-serif: Họ font không chân
+- serif: Họ font có chân
+
+### Thuộc tính text-decoration
+
+- Tác dụng: Thêm đường line vào văn bản
+- Cú pháp: text-decoration: none | underline | overline | line-through
+
+### Thuộc tính text-transform
+
+- Tác dụng: Thay đổi kiểu hoa, thường của văn bản
+- Cú pháp: text-transform: none | lowercase | uppercase | capitalize
+
+### Thuộc tính letter-spacing
+
+- Tác dụng: Thay đổi khoảng cách giữa các ký tự
+- Cú pháp: letter-spacing: giatri + donvi
+
+### Thuộc tính word-spacing
+
+- Tác dụng: Thay đổi khoảng cách giữa các từ
+- Cú pháp: word-spacing: giatri + donvi
+
+### Thuộc tính text-align
+
+- Tác dụng: Căn chỉnh văn bản theo thẻ cha (block)
+- Cú pháp: text-align: left|center|right|justify
+
+Lưu ý: Đối với các thẻ inline, trình duyệt sẽ đối xử lý như văn bản --> Dùng text-align như bình thường
+
+## Thuộc tính background
+
+- background-color --> Thay đổi màu nền
+- background-image --> Thiết lập ảnh nền
+- background-repeat --> Thay đổi độ lặp của ảnh nền
+- background-position --> Thiết lập vị trí của ảnh nền
+- background-size --> Thiết lập kích thước của ảnh nền
+- background-attachment --> Thiết lập cố định ảnh nên thay đổi thanh cuộn
+- background: Tổng hợp các thuộc trên
+
+Lưu ý: Khi thiết lập background, theo kích thước của thẻ html (Trừ body và html)
+
+background: color image repeat position / size attach
+
+## Thuộc tính border
+
+Cấu tạo border
+
+- width --> Độ dày của viền (border-width)
+- style --> Kiểu viền: none | solid | dashed | dotted | double (border-style)
+- color --> Màu viền (border-color)
+
+Ví dụ:
+
+- border-width: value --> 4 cạnh
+- border-width: value1 value2 --> value1 = top và bottom, value2 = left và right
+- border-width: value1 value2 value3 --> value1 = top, value2 = left và right, value3 = bottom
+- border-width: value1 value2 value3 value4 --> value1 = top, value2 = right, value3 = bottom, value4 = left
+
+Các thuộc tính: border-style, border-color tương tự
+
+Cú pháp chi tiết:
+
+- border-{side}-width
+- border-{side}-color
+- border-{side}-style
+
+size: top, left, right, bottom
+
+Thuộc tính viết tắt khác
+
+border: width style color
+border-{side}: width style color
+size: top, left, right, bottom
+
+## Border-radius
+
+- Nếu là hình vuông và border-radius >= 50% --> Tạo thành hình tròn
+- Nêu muốn hiệu ứng ôm tròn 2 bên --> Đặt border-radius 1 giá trị >= chiều cao
+
+Lưu ý:
+
+- transparent --> màu trong suốt
+- currentColor --> Lấy màu của thuộc tính color trong selector hiện tại
+
+Trong tất cả thuộc tính css, có 2 giá trị kế toán
+
+- inherit ==> Kế thừa từ phần tử cha
+- initial ==> Kế thừa từ mặc định trình duyệt

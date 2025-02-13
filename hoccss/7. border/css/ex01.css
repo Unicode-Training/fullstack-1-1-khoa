@@ -1,0 +1,21 @@
+.box {
+  /* border-width: 5px; */
+  /* border-style: solid; */
+  /* border-color: green red blueviolet yellow; */
+  /* border-top-color: green;
+  border-left-color: red;
+  border-right-color: yellow;
+  border-bottom-color: blueviolet; */
+  /* border: 5px solid red; */
+  /* border-right: 10px dotted greenyellow; */
+  /* border-right-color: green; */
+  width: 0;
+  height: 0;
+  border-width: 50px;
+  border-style: solid;
+  border-color: transparent blueviolet transparent transparent;
+  /* border-top-width: 0; */
+}
+body {
+  background: black;
+}

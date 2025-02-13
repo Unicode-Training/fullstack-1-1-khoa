@@ -1,0 +1,21 @@
+/* body {
+  height: 1500px;
+  background: burlywood;
+  background-image: url("https://fastly.picsum.photos/id/121/536/354.jpg?hmac=Hv2cPpcteiz3rMF6TjPCpSnJVs4AYYbFusvu7pkooe0");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+} */
+body {
+  height: 2000px;
+}
+.banner {
+  height: 300px;
+  /* background-color: red;
+  background-image: url("https://fastly.picsum.photos/id/317/1600/600.jpg?hmac=mca5F9x74REWjISlpIvtSjm67EXaY-kugct5G78ox8c");
+  background-repeat: no-repeat; */
+  /* background-size: contain; */
+  /* background-attachment: fixed; */
+  background: red
+    url("https://fastly.picsum.photos/id/317/1600/600.jpg?hmac=mca5F9x74REWjISlpIvtSjm67EXaY-kugct5G78ox8c")
+    no-repeat fixed 0 0 / cover;
+}

@@ -1,0 +1,9 @@
+.box {
+  width: 400px;
+  height: 300px;
+  border: 10px solid transparent;
+  border-image: url("https://www.pngkey.com/png/full/25-258682_borders-for-paper-border-design-certificate-border-modern.png")
+    40 round;
+  background: transparent;
+  padding: 40px;
+}

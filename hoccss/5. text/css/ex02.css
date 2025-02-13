@@ -1,0 +1,17 @@
+.box {
+  width: 600px;
+  border: 1px solid #ccc;
+  /* word-wrap: break-word; */
+  word-break: break-all;
+}
+
+.box p {
+  /* text-indent: 10px; */
+  text-align: justify;
+}
+.wrap {
+  text-align: center;
+}
+.image {
+  text-align: center;
+}
