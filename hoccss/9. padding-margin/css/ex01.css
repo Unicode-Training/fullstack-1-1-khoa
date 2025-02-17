@@ -1,0 +1,16 @@
+.box {
+  font-size: 19px;
+  border: 2px solid red;
+  padding-top: 50%;
+}
+.container {
+  width: 500px;
+}
+
+a {
+  background: green;
+  color: #fff;
+  text-decoration: none;
+  padding: 20px 30px;
+  display: inline-block;
+}

@@ -375,3 +375,108 @@ Trong tất cả thuộc tính css, có 2 giá trị kế toán
 
 - inherit ==> Kế thừa từ phần tử cha
 - initial ==> Kế thừa từ mặc định trình duyệt
+
+## Width-Height
+
+- Chỉ áp dụng nếu là block hoặc inline-block
+- Dùng thuộc tính display để chuyển (Nếu cần)
+
+Đặc biệt: Với những thẻ inline replace --> Vẫn thay đổi bình thường
+
+Đơn vị:
+
+- vw = viewport width
+- vh = viewport height
+
+Thuộc tính mở rộng
+
+- min-width: Chiều rộng tối thiểu
+- max-width: Chiều rộng tối đa
+- min-height: Chiều cao tối thiểu
+- max-height: Chiều cao tối đa
+
+## Padding - Margin
+
+- padding, margin không khả dụng top và bottom nếu là inline
+- padding, margin nếu dùng đơn vị % --> tỷ lệ theo width của thẻ cha
+- padding, margin nếu dùng em --> Tỷ lệ theo font-size của chính nó
+
+Các thuộc tính mở rộng
+
+- padding-top
+- padding-left
+- padding-right
+- padding-bottom
+- margin-top
+- margin-left
+- margin-right
+- margin-bottom
+
+- padding: value
+- padding: value1 value2
+- padding: value1 value2 value3
+- padding: value1 value2 value3 value4
+
+- margin: value
+- margin: value1 value2
+- margin: value1 value2 value3
+- margin: value1 value2 value3 value4
+
+## Thuộc tính box-sizing
+
+- content-box --> Kích thước tính từ content
+- border-box --> Kích thước tính từ border
+
+## Reset css
+
+```
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: 0;
+    outline: 0;
+}
+```
+
+## Thuộc tính display
+
+- Thay đổi chế độ hiển thị của thẻ html
+- display: none|block|inline|inline-block
+
+## Thuộc tính visibility
+
+visibility: visible|hidden
+
+## Thuộc tính position
+
+1. Vị trí tương đối
+
+position: relative
+top
+left
+right
+bottom
+z-index
+
+2. Vị trí tuyệt đối
+
+position: absolute
+top
+left
+right
+bottom
+z-index
+
+3. Vị trí cố định
+
+position: fixed
+top
+left
+right
+bottom
+z-index
+
+4. Không có position
+
+position: static

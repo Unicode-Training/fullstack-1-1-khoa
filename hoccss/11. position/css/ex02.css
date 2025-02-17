@@ -1,0 +1,32 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: 0;
+}
+.modal {
+  display: none;
+}
+.modal .modal-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  width: 600px;
+  background: #fff;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 5px;
+}
+.modal .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #0000008b;
+}
+#toggle:checked ~ .modal {
+  display: block;
+}
