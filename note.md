@@ -480,3 +480,64 @@ z-index
 4. Không có position
 
 position: static
+
+## Flex (Flexible Box Module)
+
+- Kỹ thuật giúp chia bố cục trang web linh hoạt
+- Có 2 phần:
+
+* Flex container --> Thẻ bọc các item
+* Flex Item
+
+1. Các thuộc tính trong nhóm flex container
+
+- display: flex | inline-flex --> Kích hoạt flex
+- flex-direction: Chọn hướng cho trục chính
+
+* row --> Mặc định
+* row-reverse --> Trục ngang, đảo ngược
+* column --> Chiều dọc từ trên xuống
+* column-reverse --> Chiều đọc từ dưới lên
+
+- justify-content: Điều khiển vị trí các item theo hướng song song với trục chính
+
+* flex-start
+* center
+* flex-end
+* space-around
+* space-evenly
+* space-between
+
+- align-items: Điều khiển vị trí các item theo hướng song song với trục cross (Vuông góc với trục chính)
+
+* stretch
+* flex-start
+* center
+* flex-end
+* baseline
+
+- flex-wrap: Wrap các item khi vượt ra khỏi kích thước của container
+
+* nowrap
+* wrap
+* wrap-reverse
+
+- align-content: Điều khiển các hàng (cột) theo hướng vuông góc với trục chính
+
+* stretch
+* flex-start
+* center
+* flex-end
+* space-around
+* space-evenly
+* space-between
+
+- gap: Căn chỉnh khoảng cách giữa các items
+
+2. Các thuộc tính trong nhóm item
+
+- flex-grow: Tự động giãn đều các item lấp đầy vị trí còn trống
+- flex-shrink: Tự động co lại khi bị tràn (Không có flex-wrap)
+- flex-basis: Thiết lập kích thước ban đầu của item
+- flex: grow shrink basis
+- order: Sắp xếp các item

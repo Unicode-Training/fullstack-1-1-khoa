@@ -1,0 +1,77 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border: 0;
+}
+html {
+  font-size: 10px;
+}
+body {
+  font-family: Ariral, sans-serif;
+  font-size: 1.4rem;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+a {
+  text-decoration: none;
+  color: #333;
+}
+.posts {
+  padding: 30px 0;
+}
+.container {
+  width: 1100px;
+  margin: 0 auto;
+}
+.posts .posts-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+.posts .col-small {
+  width: 25%;
+  padding: 15px;
+}
+.posts .col-big {
+  width: 50%;
+  padding: 15px;
+}
+.posts .post-list .post-item {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+.posts .post-list .post-item .post-image {
+  flex-basis: 40%;
+}
+.posts .post-list .post-item .post-title {
+  flex-basis: 60%;
+  font-size: 1.4rem;
+}
+.posts .feature-post .post-image {
+  margin-bottom: 10px;
+}
+.posts .feature-post .post-title {
+  font-size: 3.2rem;
+  line-height: 1.18;
+}
+.posts .feature-post p {
+  margin: 10px 0;
+}
+.posts .other-posts {
+  list-style: inside;
+  font-weight: 700;
+}
+.posts .post-list.one-column .post-item {
+  display: block;
+  border: 0;
+}
+.posts .post-list.one-column .post-item .post-title {
+  font-size: 1.6rem;
+  margin-top: 15px;
+}
