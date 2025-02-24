@@ -541,3 +541,22 @@ position: static
 - flex-basis: Thiết lập kích thước ban đầu của item
 - flex: grow shrink basis
 - order: Sắp xếp các item
+
+## Transition
+
+- Tạo các hiệu ứng chuyển động bắt cách thiết lập thời gian để hoàn thành 1 chuyển động
+- Chỉ có tác dụng với các thuộc tính có giá trị là số: color, kích thước, cỡ chữ,...
+
+Các thuộc tính
+
+- transition-property: all|các-thuộc-tính ==> Chọn thuộc tính muốn có chuyển động
+- transition-duration: Chọn thời gian cho chuyển động (s, ms)
+- transition-delay: Chọn thời gian trễ cho chuyển động (s, ms)
+- transition-timing-function: Lựa chọn tốc độ trên quãng đường chuyển động
+
+* ease --> Chậm nhanh chậm
+* ease-in --> Chậm nhanh
+* ease-out --> Nhanh chậm
+* ease-in-out --> Chậm nhanh chậm
+* linear --> Chuyển động đều
+* cubic-bezier() --> tự thiết lập tốc độ

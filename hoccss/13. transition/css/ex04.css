@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: 0;
+  border: 0;
+}
+.box {
+  width: 600px;
+  margin: 30px auto;
+  border: 1px solid red;
+  padding: 30px;
+}
+.box label {
+  display: block;
+  margin: 10px 0;
+}
+.box span {
+  display: flex;
+  gap: 5px;
+  position: relative;
+  overflow: hidden;
+}
+.box span::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  display: block;
+  border: 1px solid green;
+}
+.box span::after {
+  content: "";
+  width: 4px;
+  height: 7px;
+  border: solid green;
+  border-width: 0 2px 2px 0;
+  rotate: 38deg;
+  position: absolute;
+  top: -5px;
+  left: -7px;
+  transition: 0.3s ease;
+  transition-property: top, left;
+}
+.box input:checked ~ span::after {
+  top: 4px;
+  left: 8px;
+}

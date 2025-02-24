@@ -1,0 +1,28 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.box {
+  border: 1px solid red;
+  width: 700px;
+  height: 400px;
+  margin: 30px auto;
+  transition-property: background;
+  transition-duration: 1s;
+  transition-timing-function: linear;
+  /* overflow: scroll; */
+}
+.box h1 {
+  transition-property: padding-left, color;
+  transition-duration: 1s;
+  /* transition-delay: 1s; */
+  transition-timing-function: linear;
+}
+.box:hover h1 {
+  padding-left: 800px;
+  color: red;
+}
+.box:hover {
+  background: yellow;
+}
