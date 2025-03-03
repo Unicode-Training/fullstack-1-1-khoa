@@ -1,0 +1,17 @@
+.container .box {
+  color: red;
+}
+
+@media screen and (max-width: 991.98px) {
+  .box {
+    color: green;
+  }
+}
+@media screen and (max-width: 575.98px) {
+  .box {
+    color: #fff;
+  }
+  body {
+    background: green;
+  }
+}

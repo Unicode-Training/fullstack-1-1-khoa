@@ -560,3 +560,167 @@ Các thuộc tính
 * ease-in-out --> Chậm nhanh chậm
 * linear --> Chuyển động đều
 * cubic-bezier() --> tự thiết lập tốc độ
+
+## Transform
+
+- Thay đổi hình dạng ban đầu của phần tử html
+- nghiêng, xoay, phóng to, thu nhỏ, di chuyển
+
+transform: function
+
+- rotate(angle)
+- rotateX(angle)
+- rotateY(angle)
+- scale(x,y)
+- scaleX(value)
+- scaleY(value)
+- skew(angleX, angleY)
+- skewX(value)
+- skewY(value)
+- translate(x,y)
+- translateX(value)
+- translateY(value)
+
+Thuộc tính viết tắt
+
+- rotate: x y
+- scale: x y
+- translate: x y
+
+Thuộc tính transform-origin: x y
+
+## Animation
+
+- Tạo hiệu ứng cho trang web
+- 2 phần
+
+* Xây dựng kịch bản: @keyframes
+* Gọi kịch bản tương ứng với selector
+
+```css
+@keyframes tenhieuung {
+    from {
+        Các thuộc tính
+    }
+    p2% {
+
+    }
+    p3% {
+
+    }
+    to {
+        Các thuộc tính
+    }
+}
+```
+
+animation-name: tenkeyframe
+animation-duration: thoigian
+animation-delay: thoigian
+animation-timing-function: ease|ease-in|ease-out|ease-in-out|linear
+animation-iteration-count: solan|infinite
+
+## Responsive
+
+Dùng css để thay đổi giao diện giữa các màn hình (Dựa vào kích thước màn hình)
+
+1. Breakpoint
+
+- Điểm dừng màn hình mà tại đây giao diện sẽ thay đổi
+- Không có breakpoint cố định cho mọi dự án
+- breakpoint
+
+* 576px
+* 768px
+* 992px
+* 1200px
+* 1400px
+
+2. Viewport
+
+- Khung nhìn
+- Meta viewport --> Giữ nguyên tỉ lệ khi thay đổi giữa các màn hình
+
+3. Media Queries
+
+Cú pháp:
+
+```css
+@media all|screen|print and (min-width: kichthuoc1) and (max-width: kichthuoc2) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+```
+
+Trường phải 1: Desktop first (Lấy giao diện ở màn hình to làm chuẩn, bất kỳ sự thay đổi nào ở các màn hình nhỏ hơn thì cho vào media queries)
+
+```css
+selector {
+  thuoctinh: giatri;
+}
+
+@media screen and (max-width: 1399.98px) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+@media screen and (max-width: 1199.98px) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+@media screen and (max-width: 991.98px) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+@media screen and (max-width: 767.98px) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+@media screen and (max-width: 575.98px) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+```
+
+Trường phái 2: Mobile first (Lấy giao diện nhỏ nhất làm chuẩn)
+
+```css
+selector {
+  thuoctinh: giatri;
+}
+@media screen and (min-width: 576px) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+@media screen and (min-width: 768px) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+@media screen and (min-width: 992px) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+@media screen and (min-width: 1200px) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+@media screen and (min-width: 1400px) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+```
+
+Lưu ý:
+
+- Khi thay đổi màn hình --> Chọn selector --> Ghi đè
+- Tắt độ ưu tiên, có thể sử dụng !important
