@@ -1,0 +1,82 @@
+//Toán tử số học : +, -, *, /, %
+//Toán tử so sánh: >, <, >=, <=, ==, !=
+//Toán tử luận lý: and, or, not
+
+//Câu lệnh rẽ nhánh
+
+// $a: -4;
+// @if $a > 0 {
+//   @if $a < 5 {
+//     .box-small {
+//       width: 0;
+//     }
+//   } @else if $a < 10 {
+//     .box-medium {
+//       width: 50%;
+//     }
+//   } @else {
+//     .box-large {
+//       width: 100%;
+//     }
+//   }
+// }
+
+//Vòng lặp
+// $length: 12;
+// @for $i from 1 through $length {
+//   @if $i % 2 == 0 {
+//     .col-#{$i} {
+//       width: $i + 0%;
+//     }
+//   } @else {
+//     .col-#{$i} {
+//       width: $i + px;
+//     }
+//   }
+// }
+
+// $length: 12;
+// $start: 2;
+// @while $start <= $length {
+//   .col-#{$start} {
+//     width: $start + px;
+//   }
+
+//   $start: $start + 2; //Bước nhảy
+// }
+
+// $sizes: 20px, 40px, 60px, 80px, 100px; //List
+// $length: length($sizes); //Lấy số lượng phần tử của list
+// $count: 0;
+// @each $size in $sizes {
+//   $count: $count + 1;
+//   .col-#{$size} {
+//     @if ($count < $length) {
+//       width: $size;
+//     } @else {
+//       width: 0;
+//     }
+//   }
+// }
+
+// $sizes: (small 20px 300) (medium 40px 400) (large 60px 700);
+// @each $name, $size, $weight in $sizes {
+//   .#{$name} {
+//     font-size: $size;
+//     font-weight: $weight;
+//   }
+// }
+
+//map
+// $sizes: (
+//   small: 20px,
+//   //key: value
+//   medium: 40px,
+//   large: 60px,
+// );
+
+// @each $name, $value in $sizes {
+//   .col-#{$name} {
+//     font-size: $value;
+//   }
+// }

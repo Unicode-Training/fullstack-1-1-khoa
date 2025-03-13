@@ -1,0 +1,37 @@
+//Comment scss
+/*Comment css*/
+.header {
+  padding: 30px 0;
+  .topbar {
+    background: yellow;
+  }
+  .header-row {
+    display: flex;
+    .logo {
+      padding: 10px;
+      max-width: 100%;
+    }
+    ul {
+      &.menu {
+        > li {
+          > a {
+            text-decoration: none;
+            &:hover {
+              color: red;
+              &::before {
+                background: green;
+              }
+            }
+            &::before {
+              content: ">";
+            }
+          }
+
+          + li {
+            border: 0;
+          }
+        }
+      }
+    }
+  }
+}

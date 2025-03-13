@@ -1,0 +1,42 @@
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
+$displays: none block inline-block inline flex inline-flex;
+
+$directions: row column row-reverse column-reverse;
+
+@mixin displayMixin($prefix: "") {
+  @each $display in $displays {
+    $selector: #{".d-" + $display};
+    @if ($prefix != "") {
+      $selector: #{".d-" + $prefix + "-" + $display};
+    }
+    #{$selector} {
+      display: $display;
+    }
+  }
+}
+@mixin flexDirectionMixin($prefix: "") {
+  @each $direction in $directions {
+    $selector: #{".flex-" + $direction};
+    @if ($prefix != "") {
+      $selector: #{".flex-" + $prefix + "-" + $direction};
+    }
+    #{$selector} {
+      flex-direction: $direction;
+    }
+  }
+}
+@include displayMixin();
+@include flexDirectionMixin();
+@each $name, $width in $breakpoints {
+  @media screen and (min-width: #{$width}) {
+    @include displayMixin($name);
+    @include flexDirectionMixin($name);
+  }
+}

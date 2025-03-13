@@ -1,0 +1,53 @@
+//Kế thừa
+// - @extends
+// - placeholder
+// - @mixin
+
+// %section-base {
+//   width: 1200px;
+//   padding: 30px;
+// }
+// @mixin section-base($width: 1200px, $spacer: 0) {
+//   width: $width;
+//   padding: $spacer;
+// }
+
+// .products {
+//   background: green;
+//   //   @extend %section-base;
+//   @include section-base(1200px);
+// }
+
+// .posts {
+//   border: 1px solid red;
+//   //   @extend %section-base;
+//   @include section-base(1300px, 30px);
+// }
+
+@mixin small-screen {
+  @media screen and (max-width: 767.98px) {
+    @content;
+  }
+}
+
+@mixin mediaum-screen {
+  @media screen and (max-width: 991.98px) {
+    @content;
+  }
+}
+
+@include small-screen {
+  .header {
+    padding: 30px;
+  }
+  .footer {
+    background: gray;
+  }
+}
+
+@include mediaum-screen {
+  .primary-menu {
+    position: fixed;
+    inset: 0;
+  }
+}

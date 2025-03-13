@@ -1,0 +1,40 @@
+//Biến (Variable)
+// $color: red;
+// $primary-color: green;
+// $font-size: 14;
+// $font-family: "Roboto", sans-serif;
+// .header {
+//   color: $color;
+//   border: 1px solid $primary-color;
+//   font-size: $font-size + 0%;
+//   font-family: $font-family;
+// }
+
+// $property: color;
+// $value: green;
+// $selector: ".column";
+// $side: "left";
+// .header {
+//   #{$property}: $value;
+// }
+// #{$selector}-#{$side} {
+//   color: red;
+// }
+
+// .header {
+//   $color: red;
+//   .header-row {
+//     background: $color;
+//   }
+// }
+
+// .footer {
+//   color: $color;
+// }
+
+// @use "partials/variable" as bien; //namespace: variable
+// @use "partials/header"; //namespace: header
+
+// body {
+//   color: bien.$primaryColor;
+// }
