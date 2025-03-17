@@ -1,0 +1,8 @@
+@use "partials/header";
+
+body {
+  color: header.$color-secondaryColor;
+}
+// .box {
+//   @include header.-center();
+// }

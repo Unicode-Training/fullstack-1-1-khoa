@@ -724,3 +724,28 @@ Lưu ý:
 
 - Khi thay đổi màn hình --> Chọn selector --> Ghi đè
 - Tắt độ ưu tiên, có thể sử dụng !important
+
+## SCSS
+
+- Ngôn ngữ tiền xử lý CSS
+- Ngôn ngữ lập trình (Tiền thân là Ruby)
+
+### Các câu lệnh biên dịch
+
+Cài sass
+
+npm i sass -g
+
+1. Biên dịch 1 file scss sang css
+
+sass duong-dan-file-scss duong-dan-file-css
+
+--watch --> Bật watch mode
+
+2. Biên dịch cả folder scss sang css
+
+sass duong-dan-folder-scss:duong-dan-folder-css --watch
+
+3. Nén file scss thành file css
+
+sass duong-dan-file-scss duong-dan-file-css --style compressed

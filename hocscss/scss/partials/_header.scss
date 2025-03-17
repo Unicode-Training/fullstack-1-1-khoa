@@ -1,4 +1,11 @@
-$primaryColor: green;
+@use "./variable";
+@forward "./variable" as color-*;
+$_textColor: #333;
+@mixin -center {
+  text-align: center;
+}
 .header {
-  background: $primaryColor;
+  background: variable.$primaryColor;
+  color: $_textColor;
+  @include -center();
 }
