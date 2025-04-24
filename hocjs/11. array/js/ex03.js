@@ -153,12 +153,12 @@ console.log(Array.prototype);
 // console.log(result);
 
 // Bài tập: Xóa bỏ phần tử trùng nhau trong mảng
-const users = ["User 1", "User 2", "User 3", "User 2", "User 4", "User 1"];
-const newUsers = users.reduce((prev, current) => {
-  if (!prev.includes(current)) {
-    prev.push(current);
-  }
-  return prev;
-}, []);
+// const users = ["User 1", "User 2", "User 3", "User 2", "User 4", "User 1"];
+// const newUsers = users.reduce((prev, current) => {
+//   if (!prev.includes(current)) {
+//     prev.push(current);
+//   }
+//   return prev;
+// }, []);
 
-console.log(newUsers);
+// console.log(newUsers);
