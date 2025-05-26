@@ -57,19 +57,19 @@
 // imgEl.classList.toggle("img-05"); //Thêm mới
 // imgEl.classList.toggle("img-05"); //Xóa bỏ
 
-// const liList = document.querySelectorAll("ul li");
-// liList.forEach((element) => {
-//   element.addEventListener("click", () => {
-//     //Xóa active của item đang mở
-//     const itemActive = document.querySelector("ul li.active");
+const liList = document.querySelectorAll("ul li");
+liList.forEach((element) => {
+  element.addEventListener("click", () => {
+    //Xóa active của item đang mở
+    const itemActive = document.querySelector("ul li.active");
 
-//     element.classList.toggle("active");
+    element.classList.toggle("active");
 
-//     if (itemActive) {
-//       itemActive.classList.remove("active");
-//     }
-//   });
-// });
+    if (itemActive) {
+      itemActive.classList.remove("active");
+    }
+  });
+});
 
 /*
 Khi click vào element --> Kiểm tra xem có item nào có class active không?
