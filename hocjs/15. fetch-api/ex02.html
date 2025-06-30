@@ -4,8 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      .pagination .active {
+        color: red;
+        background: yellow;
+      }
+    </style>
   </head>
   <body>
+    <input type="search" class="keyword" placeholder="Từ khóa..." />
+    <hr />
     <table width="100%" border="1" cellpadding="5" cellspacing="0">
       <thead>
         <tr>
@@ -18,6 +26,21 @@
       </thead>
       <tbody></tbody>
     </table>
+    <hr />
+    <div class="pagination"></div>
+    <form>
+      <h3>Thêm người dùng</h3>
+      <div>
+        <label for="">Tên</label>
+        <input type="text" placeholder="Tên..." class="name" required />
+      </div>
+      <div>
+        <label for="">Email</label>
+        <input type="email" placeholder="Email..." class="email" required />
+        <span class="error-email"></span>
+      </div>
+      <button>Thêm</button>
+    </form>
     <script src="js/ex02.js"></script>
   </body>
 </html>
