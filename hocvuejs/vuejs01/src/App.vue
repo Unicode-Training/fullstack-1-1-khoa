@@ -1,19 +1,46 @@
 <template>
-  <div>
-    <!-- <h1>Học Vue không khó</h1>
-    <Header title="Unicode" v-bind:menus="menus" v-on:click-me="handleClick" />
-    <Counter /> -->
-    <Form />
-  </div>
+  <button @click="isOpenModal = !isOpenModal">Thêm mới</button>
+
+  <h2>Danh sách bài viết</h2>
+  <template v-for="post in posts">
+    <div class="post-item">
+      <h3>{{ post.title }}</h3>
+      <p>{{ post.content }}</p>
+    </div>
+  </template>
+
+  <Modal
+    v-if="isOpenModal"
+    @close-modal="handleClose"
+    @submit="handleSubmit"
+    @form-change="handleFormChange"
+    :init-form="initForm"
+  />
 </template>
 
 <script setup>
-// import Header from "./components/Header.vue";
-// import Counter from "./components/Counter.vue";
-// const menus = ["Menu 1", "Menu 2", "Menu 3"];
-// const handleClick = (data) => {
-//   console.log(data);
-// };
+import { ref, watch } from "vue";
+import Modal from "./components/Modals/Modal.vue";
+const isOpenModal = ref(false);
+const posts = ref([]);
+const initForm = ref({});
 
-import Form from "./components/Form.vue";
+const handleClose = () => {
+  isOpenModal.value = false;
+};
+const handleSubmit = (data) => {
+  posts.value.push(data);
+};
+const handleFormChange = (data) => {
+  initForm.value = data;
+};
+watch(
+  posts,
+  () => {
+    isOpenModal.value = false;
+  },
+  {
+    deep: true,
+  }
+);
 </script>
