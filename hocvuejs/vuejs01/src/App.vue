@@ -1,46 +1,75 @@
 <template>
-  <button @click="isOpenModal = !isOpenModal">Thêm mới</button>
-
-  <h2>Danh sách bài viết</h2>
-  <template v-for="post in posts">
-    <div class="post-item">
-      <h3>{{ post.title }}</h3>
-      <p>{{ post.content }}</p>
+  <div class="main">
+    <div class="sidebar" ref="sidebarRef">
+      <h3>Sidebar</h3>
+      <div class="line" @mousedown="handleMouseDown"></div>
     </div>
-  </template>
-
-  <Modal
-    v-if="isOpenModal"
-    @close-modal="handleClose"
-    @submit="handleSubmit"
-    @form-change="handleFormChange"
-    :init-form="initForm"
-  />
+    <div class="content">
+      <h2>Content</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
+        accusamus, vitae perferendis repellat id sit quod quas voluptate cum
+        maxime consectetur voluptates. Atque facilis quod soluta non,
+        voluptatibus modi quo.
+      </p>
+    </div>
+  </div>
 </template>
-
 <script setup>
-import { ref, watch } from "vue";
-import Modal from "./components/Modals/Modal.vue";
-const isOpenModal = ref(false);
-const posts = ref([]);
-const initForm = ref({});
+import { ref } from "vue";
 
-const handleClose = () => {
-  isOpenModal.value = false;
+const sidebarRef = ref(null);
+const handleMouseDown = () => {
+  document.addEventListener("mousemove", handleMouseMove);
+  document.addEventListener("mouseup", handleMouseUp);
 };
-const handleSubmit = (data) => {
-  posts.value.push(data);
+const handleMouseMove = (e) => {
+  const clientX = e.clientX;
+  sidebarRef.value.style.width = clientX + "px";
 };
-const handleFormChange = (data) => {
-  initForm.value = data;
+const handleMouseUp = () => {
+  //Xóa event mousemove
+  document.removeEventListener("mousemove", handleMouseMove);
+  document.removeEventListener("mouseup", handleMouseUp);
 };
-watch(
-  posts,
-  () => {
-    isOpenModal.value = false;
-  },
-  {
-    deep: true,
-  }
-);
 </script>
+<style>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body,
+html,
+#app {
+  height: 100%;
+}
+
+.main {
+  display: flex;
+  height: 100%;
+}
+.sidebar {
+  width: 250px;
+  height: 100%;
+  background: #efefef;
+  position: relative;
+}
+.line {
+  position: absolute;
+  width: 4px;
+  right: 0;
+  top: 0;
+  height: 100%;
+  background: gray;
+  cursor: ew-resize;
+  opacity: 0;
+}
+.sidebar:hover .line {
+  opacity: 1;
+}
+.content {
+  flex: 1;
+  padding: 15px;
+}
+</style>
