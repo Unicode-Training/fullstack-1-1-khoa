@@ -5,9 +5,13 @@
       {{ isLoading ? "Loading..." : "Add" }}
     </button>
   </form>
+  <Text />
 </template>
 <script setup>
+defineProps(["heading"]);
+
 import { ref } from "vue";
+import Text from "./Text.vue";
 const emits = defineEmits();
 const title = ref("");
 const isLoading = ref(false);
