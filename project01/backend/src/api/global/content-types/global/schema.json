@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "globals",
+  "info": {
+    "singularName": "global",
+    "pluralName": "globals",
+    "displayName": "Settings",
+    "description": "Define global settings"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "top_bar": {
+      "type": "string"
+    },
+    "top_bar_link": {
+      "type": "string"
+    },
+    "top_bar_label": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Menu": {
+      "type": "component",
+      "component": "shared.menu",
+      "repeatable": true
+    }
+  }
+}

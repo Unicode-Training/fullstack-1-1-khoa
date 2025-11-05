@@ -19,29 +19,35 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { axiosAuth } from "../configs/axios";
 const email = ref("");
 const password = ref("");
 const message = ref("");
 const isLoading = ref(false);
 const router = useRouter();
 const handleSubmit = async () => {
-  isLoading.value = true;
-  const response = await fetch("https://api.escuelajs.co/api/v1/auth/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
+  // const response = await fetch("https://api.escuelajs.co/api/v1/auth/login", {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify({
+  //     email: email.value,
+  //     password: password.value,
+  //   }),
+  // });
+  try {
+    isLoading.value = true;
+    const response = await axiosAuth.post(`auth/login`, {
       email: email.value,
       password: password.value,
-    }),
-  });
-  isLoading.value = false;
-  if (!response.ok) {
+    });
+    const data = response.data;
+    localStorage.setItem("access_token", data.access_token);
+    localStorage.setItem("refresh_token", data.refresh_token);
+    router.push({ name: "home" });
+  } catch {
     message.value = "Invalid email or password";
-    return;
+  } finally {
+    isLoading.value = false;
   }
-  const data = await response.json();
-  localStorage.setItem("access_token", data.access_token);
-  localStorage.setItem("refresh_token", data.refresh_token);
-  router.push({ name: "home" });
 };
 </script>

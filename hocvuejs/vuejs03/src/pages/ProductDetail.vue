@@ -24,13 +24,18 @@
 <script setup>
 import { useRoute } from "vue-router";
 import { ref, onMounted } from "vue";
+import { axiosInstance } from "../configs/axios";
 const { params } = useRoute();
 const product = ref({});
 const isLoading = ref(true);
 const productId = params.productId;
 const getProduct = async () => {
-  const response = await fetch(`https://dummyjson.com/products/${productId}`);
-  const data = await response.json();
+  // const response = await fetch(`https://dummyjson.com/products/${productId}`);
+  // const data = await response.json();
+  const response = await axiosInstance.get(
+    `https://dummyjson.com/products/${productId}`
+  );
+  const data = response.data;
   product.value = data;
   isLoading.value = false;
 };

@@ -17,6 +17,7 @@
 <script setup>
 import { ref, onMounted, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { axiosInstance } from "../configs/axios";
 const search = ref("");
 const router = useRouter();
 const route = useRoute();
@@ -31,9 +32,10 @@ const getProducts = async (search = "") => {
   if (search) {
     url = "https://dummyjson.com/products/search?q=" + search;
   }
-  const response = await fetch(url);
-  const data = await response.json();
-  products.value = data.products;
+  // const response = await fetch(url);
+  // const data = await response.json();
+  const response = await axiosInstance.get(url);
+  products.value = response.data.products;
 };
 onMounted(() => {
   getProducts(route.query.search || "");

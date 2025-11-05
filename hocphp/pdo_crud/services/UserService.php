@@ -8,7 +8,7 @@ class UserService
         $this->db = new Database();
     }
 
-    public function getAllUsers($filters = [])
+    public function getAllUsers($filters = [], $page = 1)
     {
         $sql = "SELECT * FROM users";
         $data = [];
@@ -28,8 +28,17 @@ class UserService
             $sql .= " $operator status=:status";
             $data['status'] = $filters['status'] == 'active' ? 1 : 0;
         }
+        $offset = ($page - 1) * 3;
 
-        return $this->db->fetchAll($sql, $data);
+        $sqlAll = $sql;
+        $sql .= " LIMIT 3 OFFSET " . $offset;
+
+        $count = $this->db->rowCount($sqlAll, $data);
+        $data = $this->db->fetchAll($sql, $data);
+        return [
+            'data' => $data,
+            'count' => $count
+        ];
     }
 
     public function createUser($userData)
@@ -38,10 +47,23 @@ class UserService
         return $this->db->query($sql, $userData);
     }
 
+    public function updateUser($userData, $id)
+    {
+        $sql = "UPDATE users SET name=:name,email=:email,status=:status WHERE id=:id";
+        $userData['id'] = $id;
+        return $this->db->query($sql, $userData);
+    }
+
     public function deleteUser($userId)
     {
         $sql = "DELETE FROM users WHERE id = :id";
         return $this->db->query($sql, ['id' => $userId]);
+    }
+
+    public function getUserById($userId)
+    {
+        $sql = "SELECT * FROM users WHERE id = :id";
+        return $this->db->fetch($sql, ['id' => $userId]);
     }
 }
 

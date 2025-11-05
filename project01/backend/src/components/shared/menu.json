@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_menus",
+  "info": {
+    "displayName": "Menu"
+  },
+  "options": {},
+  "attributes": {
+    "menu_label": {
+      "type": "string"
+    },
+    "menu_link": {
+      "type": "string"
+    },
+    "menu_target": {
+      "type": "enumeration",
+      "enum": [
+        "_self",
+        "_blank"
+      ]
+    }
+  },
+  "config": {}
+}

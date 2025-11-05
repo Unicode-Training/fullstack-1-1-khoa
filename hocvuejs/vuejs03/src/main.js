@@ -7,6 +7,7 @@ import { routes } from "./configs/routes";
 
 import { useCounterStore } from "./store/counter";
 import { useAuthStore } from "./store/auth";
+import { axiosAuth } from "./configs/axios";
 const pinia = createPinia();
 
 //gọi counterStore --> Lỗi
@@ -30,30 +31,19 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   //Xử lý lấy thông tin user
 
-  const accessToken = localStorage.getItem("access_token");
   const store = useAuthStore();
-  if (accessToken) {
+
+  try {
     store.updateLoading(true);
-    const response = await fetch(
-      `https://api.escuelajs.co/api/v1/auth/profile`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
+    const response = await axiosAuth.get(
+      `https://api.escuelajs.co/api/v1/auth/profile`
     );
-    if (!response.ok) {
-      store.updateAuthenticated(false);
-      store.updateUser({});
-    } else {
-      const data = await response.json();
-      store.updateAuthenticated(true);
-      store.updateUser(data);
-    }
-    store.updateLoading(false);
-  } else {
+    store.updateAuthenticated(true);
+    store.updateUser(response.data);
+  } catch {
     store.updateAuthenticated(false);
     store.updateUser({});
+  } finally {
     store.updateLoading(false);
   }
 

@@ -39,4 +39,10 @@ class Database
         $query = $this->query($sql, $data);
         return $query->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function rowCount($sql, $data)
+    {
+        $query = $this->query($sql, $data);
+        return $query->rowCount(); //Trả về dòng của câu lệnh truy vấn
+    }
 }

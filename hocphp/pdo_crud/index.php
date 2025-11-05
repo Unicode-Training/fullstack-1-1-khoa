@@ -12,11 +12,17 @@ if ($request->query('search')) {
 if ($request->query('status') && in_array($request->query('status'), ['active', 'inactive'])) {
     $status = $request->query('status');
 }
-$users = $userService->getAllUsers([
+$page = $request->query('page') ?? 1;
+$allUsers = $userService->getAllUsers([
     'search' => $searchTerm,
     'status' => $status ?? null
-]);
+], $page);
+$users = $allUsers['data'];
+$count = $allUsers['count'];
 $message = Session::flash('message');
+
+//Tính số trang
+$maxPage = ceil($count / 3);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,12 +65,18 @@ $message = Session::flash('message');
                     <td><?php echo $key + 1; ?></td>
                     <td><?php echo $value['name']; ?></td>
                     <td><?php echo $value['email']; ?></td>
-                    <td><a href="#">Sửa</a></td>
+                    <td><a href="/pdo_crud/edit.php?id=<?php echo $value['id']; ?>">Sửa</a></td>
                     <td><a onclick="return confirm('Bạn có chắc?')" href="/pdo_crud/action/delete.php?id=<?php echo $value['id']; ?>">Xóa</a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
+    <hr>
+    <div style="display: flex; justify-content: center; gap: 10px;">
+        <?php for ($page = 1; $page <= $maxPage; $page++): ?>
+            <a href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
+        <?php endfor; ?>
+    </div>
 </body>
 
 </html>
