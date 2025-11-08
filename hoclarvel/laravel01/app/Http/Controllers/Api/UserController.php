@@ -9,73 +9,78 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    private $userService;
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
     public function index(Request $request)
     {
-        // $status = $request->query('status');
-        // $status = $request->status;
-        // $status = $request->input('status');
-        // return $status;
-        // $category = $request->category;
-        // $category = $request->query('category');
-        // return $category;
-        // $apiKey = $request->header('x-api-key');
-        // return $apiKey;
+        //?email=user2&status=active
+        //- Tìm email theo like '%user2%'
+        //- Tìm status theo = 
+        $filters = $request->only(['keyword', 'status']);
+        $sort = $request->only(['sort', 'order']);
+        $select = $request->query('select');
+        $limit = $request->query('limit');
+        $offset = $request->query('offset');
+        $paginate = $request->query('paginate');
 
-        // return response()->json([
-        //     'User 1',
-        //     'User 2',
-        //     'User 3',
-        // ], 404, [
-        //     'X-Test-Header' => 'Value'
-        // ]);
-
-        $userService = new UserService();
-        return $userService->getAll();
+        return $this->userService->getAll($filters, $sort, $select, $limit, $offset, $paginate);
     }
 
     public function show($id)
     {
-        return 'User ' . $id;
+        $data = $this->userService->getOne($id);
+        if (!$data) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Không tìm thấy bản ghi nây'
+            ], 404);
+        }
+        return $data;
     }
 
     public function store(Request $request)
     {
-        // $name = $request->name;
-        // $email = $request->email;
-        // $name = $request->input('name');
-        // $email = $request->input('email');
 
-        // $body = $request->all();
-        // $emailFromUrl = $request->query('email');
-        // return [
-        //     $body,
-        //     $emailFromUrl
-        // ];
-
-        // return [
-        //     'name' => $name,
-        //     'email' => $email,
-        // ];
-
+        //Validate
         $body = $request->validate([
-            'name' => [
-                'required',
-                'min:3',
-                function ($attribute, $value, $fail) {
-                    if ($value != mb_strtoupper($value)) {
-                        $fail(":attribute phải viết hoa");
-                    }
-                }
-            ],
-            'email' => 'required|email'
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6'
         ], [
             'required' => ':attribute bắt buộc phải nhập',
-            'min' => ':attribute phải nhất lớn nhất :min ký tự',
-            'email' => ":attribute không đúng định dạng"
+            'email' => ':attribute không đúng định dạng',
+            'unique' => ':attribute đã tồn tại',
+            'min' => ':attribute phải từ :min ký tự'
         ], [
-            'name' => "Tên",
-            'email' => "Email",
+            'name' => 'Tên',
+            'email' => 'Email',
+            'password' => "Mật khẩu"
         ]);
-        return $body;
+        return $this->userService->create($body);
+    }
+
+    public function update(Request $request, $id)
+    {
+        //Validate
+        $body = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+        ], [
+            'required' => ':attribute bắt buộc phải nhập',
+            'email' => ':attribute không đúng định dạng',
+            'unique' => ':attribute đã tồn tại',
+        ], [
+            'name' => 'Tên',
+            'email' => 'Email',
+        ]);
+        return $this->userService->update($body, $id);
+    }
+
+    public function delete($id)
+    {
+        return $this->userService->delete($id);
     }
 }
