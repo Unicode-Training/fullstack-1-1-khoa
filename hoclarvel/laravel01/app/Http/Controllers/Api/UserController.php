@@ -25,12 +25,17 @@ class UserController extends Controller
         $limit = $request->query('limit');
         $offset = $request->query('offset');
         $paginate = $request->query('paginate');
+        $includes = $request->query('includes');
+        $limitRelations = $request->query('limit-relations');
 
-        return $this->userService->getAll($filters, $sort, $select, $limit, $offset, $paginate);
+        // \DB::enableQueryLog();
+        return $this->userService->getAll($filters, $sort, $select, $limit, $offset, $paginate, $includes, $limitRelations);
+        // return \DB::getQueryLog();
     }
 
     public function show($id)
     {
+        // \DB::enableQueryLog();
         $data = $this->userService->getOne($id);
         if (!$data) {
             return response()->json([
@@ -38,6 +43,7 @@ class UserController extends Controller
                 'message' => 'Không tìm thấy bản ghi nây'
             ], 404);
         }
+        // return \DB::getQueryLog();
         return $data;
     }
 
@@ -59,6 +65,9 @@ class UserController extends Controller
             'email' => 'Email',
             'password' => "Mật khẩu"
         ]);
+        if ($request->phone) {
+            $body['phone'] = $request->phone;
+        }
         return $this->userService->create($body);
     }
 
@@ -76,6 +85,9 @@ class UserController extends Controller
             'name' => 'Tên',
             'email' => 'Email',
         ]);
+        if ($request->phone) {
+            $body['phone'] = $request->phone;
+        }
         return $this->userService->update($body, $id);
     }
 

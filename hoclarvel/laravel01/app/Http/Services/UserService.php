@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
-    public function getAll($filters = [], $sort = [], $select, $limit, $offset, $paginate)
+    public function getAll($filters = [], $sort = [], $select, $limit, $offset, $paginate, $includes, $limitRelations)
     {
         // $filterData = [];
         // if (!empty($filters['email'])) {
@@ -25,7 +25,28 @@ class UserService
         //     ];
         // }
         // $users = User::where($filterData)->orWhere('id', 1)->get();
-        $query = User::query();
+        $relations = [];
+        if ($includes) {
+            $relations = explode(',', $includes);
+        }
+        if ($limitRelations) {
+            $keys = array_keys($limitRelations);
+
+            if (!empty($keys[0])) {
+                foreach ($relations as $index => $relation) {
+                    if ($relation == $keys[0]) {
+                        unset($relations[$index]);
+                        break;
+                    }
+                }
+                $relations[$keys[0]] = function ($q) use ($keys, $limitRelations) {
+                    $value = $limitRelations[$keys[0]];
+                    $q->limit($value);
+                };
+            }
+        }
+
+        $query = User::with($relations);
         if (!empty($filters['status'])) {
             $status = $filters['status'] == 'active' ? 1 : 0;
             $query->where('status', $status);
@@ -33,7 +54,8 @@ class UserService
         if (!empty($filters['keyword'])) {
             $query->where(function ($q) use ($filters) {
                 $q->where('name', 'like', '%' . $filters['keyword'] . '%')
-                    ->orWhere('email', 'like', '%' . $filters['keyword'] . '%');
+                    ->orWhere('email', 'like', '%' . $filters['keyword'] . '%')
+                    ->orWhereRelation('phone', 'phone', 'like', '%' . $filters['keyword'] . '%');
             });
         }
 
@@ -56,34 +78,65 @@ class UserService
         $query->orderBy($sortField, $sortOrder);
 
         if ($paginate == 'true') {
-            return $query->paginate($limit ?? 10);
+            $users = $query->paginate($limit ?? 10);
         }
 
-        //SELECT * FROM users WHERE status = 1 AND (name like '%tukhoa%' OR email like '%tukhoa%')
-        return $query->get();
+        $users = $query->get();
+
+        // foreach ($users as $user) {
+        //     $user->phone;
+        // }
+        return $users;
     }
 
-    public function create($user)
+    public function create($body)
     {
-        $user['password'] = Hash::make($user['password']);
-        return User::create($user);
+
+        $body['password'] = Hash::make($body['password']);
+        $user =  User::create($body);
+        if (!empty($body['phone'])) {
+            $user->phone()->create([
+                'phone' => $body['phone']
+            ]);
+        }
+        $user->phone =  $body['phone'];
+        return $user;
     }
 
-    public function update($user, $id)
+    public function update($body, $id)
     {
-        User::where('id', $id)->update($user);
-        return User::find($id); //Lấy bản ghi theo khóa chính
+        $phone = null;
+        if (!empty($body['phone'])) {
+            $phone = $body['phone'];
+        }
+        unset($body['phone']);
+        User::where('id', $id)->update($body);
+        $user = User::find($id); //Lấy bản ghi theo khóa chính
+        if ($phone) {
+            $user->phone->update([
+                'phone' => $phone
+            ]);
+        }
+        return $user;
     }
 
     public function delete($id)
     {
         $data = User::find($id);
+        $data->phone->delete(); //Xóa record bên bảng phone
         User::where('id', $id)->delete();
         return $data;
     }
 
     public function getOne($id)
     {
-        return User::find($id);
+        $user =  User::find($id);
+        // $user->phone;
+        return $user;
+    }
+
+    public function getUsersByCourse($course)
+    {
+        return $course->users;
     }
 }
