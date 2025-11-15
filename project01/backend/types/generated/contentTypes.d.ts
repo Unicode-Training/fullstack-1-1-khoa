@@ -543,6 +543,40 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiDemoDemo extends Struct.CollectionTypeSchema {
+  collectionName: 'demos';
+  info: {
+    displayName: 'Demo';
+    pluralName: 'demos';
+    singularName: 'demo';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    country_selector: Schema.Attribute.JSON &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        ['Multi-select:a', 'ISO code:b', 'Continent grouping:c']
+      > &
+      Schema.Attribute.DefaultTo<'[]'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    geo_availability_settings: Schema.Attribute.Enumeration<
+      ['No Restriction', 'Include', 'Exclude']
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::demo.demo'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   collectionName: 'globals';
   info: {
@@ -1127,6 +1161,7 @@ declare module '@strapi/strapi' {
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
+      'api::demo.demo': ApiDemoDemo;
       'api::global.global': ApiGlobalGlobal;
       'api::product.product': ApiProductProduct;
       'plugin::content-releases.release': PluginContentReleasesRelease;

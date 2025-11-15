@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "demos",
+  "info": {
+    "singularName": "demo",
+    "pluralName": "demos",
+    "displayName": "Demo"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "geo_availability_settings": {
+      "type": "enumeration",
+      "enum": [
+        "No Restriction",
+        "Include",
+        "Exclude"
+      ]
+    },
+    "country_selector": {
+      "type": "customField",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "geo_availability_settings"
+            },
+            "No Restriction"
+          ]
+        }
+      },
+      "customField": "plugin::multi-select.multi-select",
+      "default": "[]",
+      "options": [
+        "Multi-select:a",
+        "ISO code:b",
+        "Continent grouping:c"
+      ],
+      "required": true
+    }
+  }
+}
