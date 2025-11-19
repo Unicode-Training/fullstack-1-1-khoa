@@ -139,4 +139,9 @@ class UserService
     {
         return $course->users;
     }
+
+    public function getUserByEmail($email)
+    {
+        return User::where('email', $email)->first();
+    }
 }

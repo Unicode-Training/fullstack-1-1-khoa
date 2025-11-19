@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
@@ -8,7 +9,7 @@ use App\Http\Controllers\Api\UserPostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/users')->group(function () {
+Route::prefix('/users')->middleware(['auth', 'permission'])->group(function () {
     Route::get('/', [UserController::class, 'index']);
     Route::prefix("{id}")->group(function () {
         Route::get('/', [UserController::class, 'show']);
@@ -44,3 +45,11 @@ Route::prefix('/courses')->group(function () {
 });
 
 //path + method (get, post, put, patch, delete)
+
+Route::prefix('/auth')->group(function () {
+    Route::post('/login', [LoginController::class, 'login']);
+    Route::get('/profile', [LoginController::class, 'profile'])->middleware('auth');
+    Route::put('/profile', [LoginController::class, 'updateProfile'])->middleware('auth');
+
+    Route::post('/refresh-token', [LoginController::class, 'refreshToken']);
+});
