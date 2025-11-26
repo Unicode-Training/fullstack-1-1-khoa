@@ -21,6 +21,7 @@ class JwtService
         $userId = $user->id;
         $email = $user->email;
         $jwt = JWT::encode([
+            'jti' => uniqid(),
             'userId' => $userId,
             'email' => $email,
             'iat' => time(),

@@ -35,4 +35,9 @@ class User extends Model
     {
         return $this->belongsToMany(Course::class, 'users_courses', 'user_id', 'course_id');
     }
+
+    public function blacklists()
+    {
+        return $this->hasMany(BlacklistJWT::class, 'user_id', 'id');
+    }
 }

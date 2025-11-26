@@ -52,4 +52,7 @@ Route::prefix('/auth')->group(function () {
     Route::put('/profile', [LoginController::class, 'updateProfile'])->middleware('auth');
 
     Route::post('/refresh-token', [LoginController::class, 'refreshToken']);
+    Route::delete('/logout', [LoginController::class, 'logout'])->middleware('auth');
 });
+
+Route::get('/test', [LoginController::class, 'test']);

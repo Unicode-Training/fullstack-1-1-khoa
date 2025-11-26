@@ -52,4 +52,28 @@ class LoginController extends Controller
         }
         return $newToken;
     }
+
+    public function logout(Request $request)
+    {
+        $user = $request->user;
+
+        $status = $this->authService->logout($user, $request->jti, $request->expired);
+        if (!$status) {
+
+            return response()->json([
+                'message' => 'Logout failed',
+                'success' => false
+            ], 500);
+        }
+        return response()->json([
+            'message' => 'Logout successfuly',
+            'success' => true,
+            'date' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    public function test()
+    {
+        return $this->authService->deleteBlacklistsExpired();
+    }
 }

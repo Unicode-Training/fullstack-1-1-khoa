@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Services\AuthService;
 use App\Http\Services\JwtService;
 use App\Http\Services\UserService;
 use Closure;
@@ -19,10 +20,12 @@ class AuthMiddleware
      */
     private $jwtService = null;
     private $userService = null;
-    public function __construct(JwtService $jwtService, UserService $userService)
+    private $authService = null;
+    public function __construct(JwtService $jwtService, UserService $userService, AuthService $authService)
     {
         $this->jwtService = $jwtService;
         $this->userService = $userService;
+        $this->authService = $authService;
     }
     public function handle(Request $request, Closure $next): Response
     {
@@ -45,6 +48,22 @@ class AuthMiddleware
 
         $user = $this->userService->getOne($decoded->userId);
         $request->user = $user;
+        $request->token = $token;
+        $request->jti = $decoded->jti;
+        $request->expired = date('Y-m-d H:i:s', $decoded->exp);
+
+        //Lấy jti
+        //Truy vấn với bảng blacklist
+        //- Tồn tại --> 401
+        //- Không tồn tại --> Bỏ qua
+        $isBlacklist = $this->authService->isBlacklist($decoded->jti, $user);
+        if ($isBlacklist) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorize'
+            ], 401);
+        }
+
         return $next($request);
     }
 }

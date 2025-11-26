@@ -2,6 +2,8 @@
 
 namespace App\Http\Services;
 
+use App\Models\BlacklistJWT;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -49,5 +51,29 @@ class AuthService
             'access_token' => $this->jwtService->createToken($decoded),
             'refresh_token' => $this->jwtService->createRefreshToken($decoded)
         ];
+    }
+
+    public function logout($user, $token, $expired)
+    {
+        try {
+            return $user->blacklists()->create(
+                [
+                    'token' => $token,
+                    'expired' => $expired
+                ]
+            );
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public function isBlacklist($jti, $user)
+    {
+        return $user->blacklists()->where('token', $jti)->count();
+    }
+
+    public function deleteBlacklistsExpired()
+    {
+        return BlacklistJWT::where('expired', '<=', date('Y-m-d H:i:s'))->delete();
     }
 }
