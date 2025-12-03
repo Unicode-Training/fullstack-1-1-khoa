@@ -15,23 +15,31 @@ class PostService
         return $query->get();
     }
 
-    public function getAll($request)
+    public function getAll($request, $user)
     {
-        $query = Post::query();
+        // $query = Post::query();
+        $query = $user->posts();
         if ($request->query('keyword')) {
             $query->where('title', 'like', '%' . $request->query('keyword') . '%');
         }
+        // $query->where('user_id', $user->id);
         return $query->get();
     }
 
-    public function getOne($id)
+    public function getOne($id, $user)
     {
-        return Post::find($id);
+        return $user->posts()->where('id', $id)->first();
     }
 
-    public function delete($id)
+    public function delete($id, $user)
     {
-        $post = $this->getOne($id);
+        $post = Post::find($id);
+        if (!$post) {
+            return 'not-found';
+        }
+        if ($post->user_id != $user->id) {
+            return 'permission';
+        }
         $post->delete();
         return $post;
     }
@@ -39,5 +47,17 @@ class PostService
     public function create($user, $body)
     {
         return $user->posts()->create($body);
+    }
+
+    public function update($body, $id, $user)
+    {
+        $post = Post::find($id);
+        if (!$post) {
+            return 'not-found';
+        }
+        if ($post->user_id != $user->id) {
+            return 'permission';
+        }
+        return $post->update($body);
     }
 }

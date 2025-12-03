@@ -16,13 +16,14 @@ class PostController extends Controller
     }
     public function index(Request $request)
     {
-
-        return $this->postService->getAll($request);
+        $user = $request->user;
+        return $this->postService->getAll($request, $user);
     }
 
-    public function show($id)
+    public function show($id, Request $request)
     {
-        $post = $this->postService->getOne($id);
+        $user = $request->user;
+        $post = $this->postService->getOne($id, $user);
         if (!$post) {
             return response()->json([
                 'success' => false,
@@ -32,8 +33,53 @@ class PostController extends Controller
         return $post;
     }
 
-    public function delete($id)
+    public function update(Request $request, $id)
     {
-        return $this->postService->delete($id);
+        $user = $request->user;
+        $result = $this->postService->update($request->all(), $id, $user);
+
+        if ((string)$result == 'not-found') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Post not found'
+            ], 404);
+        }
+        if ((string)$result == 'permission') {
+            return response()->json([
+                'success' => false,
+                'message' => 'User permission'
+            ], 403);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Update post successful'
+        ]);
+    }
+
+    public function delete($id, Request $request)
+    {
+        $user = $request->user;
+        $result = $this->postService->delete($id, $user);
+        if ((string)$result == 'not-found') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Post not found'
+            ], 404);
+        }
+        if ((string)$result == 'permission') {
+            return response()->json([
+                'success' => false,
+                'message' => 'User permission'
+            ], 403);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Delete post successful'
+        ]);
     }
 }
+
+//posts.view
+//posts.create
+//posts.update
+//posts.delete

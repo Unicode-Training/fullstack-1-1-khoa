@@ -40,4 +40,13 @@ class UserPostController extends Controller
         }
         return $this->postService->create($user, $request->all());
     }
+
+    public function createByAuth(Request $request)
+    {
+        $request->validate([
+            'title' => 'required'
+        ]);
+        $user = $request->user;
+        return $this->postService->create($user, $request->all());
+    }
 }

@@ -32,9 +32,14 @@ Route::prefix('/users')->middleware(['auth', 'permission'])->group(function () {
 });
 
 Route::prefix('/posts')->group(function () {
-    Route::get('/', [PostController::class, 'index']);
-    Route::get('/{id}', [PostController::class, 'show']);
-    Route::delete('/{id}', [PostController::class, 'delete']);
+    Route::get('/', [PostController::class, 'index'])->middleware(['auth', 'permission:posts.view']);
+    Route::get('/{id}', [PostController::class, 'show'])->middleware(['auth', 'permission:posts.view']);
+    Route::delete('/{id}', [PostController::class, 'delete'])->middleware(['auth', 'permission:posts.delete']);
+
+    //Thêm tài nguyên từ user đã đăng nhập
+    Route::post('/', [UserPostController::class, 'createByAuth'])->middleware(['auth', 'permission:posts.create']);
+
+    Route::put('/{id}', [PostController::class, 'update'])->middleware(['auth', 'permission:posts.update']);
 });
 
 Route::prefix('/courses')->group(function () {
@@ -54,5 +59,3 @@ Route::prefix('/auth')->group(function () {
     Route::post('/refresh-token', [LoginController::class, 'refreshToken']);
     Route::delete('/logout', [LoginController::class, 'logout'])->middleware('auth');
 });
-
-Route::get('/test', [LoginController::class, 'test']);

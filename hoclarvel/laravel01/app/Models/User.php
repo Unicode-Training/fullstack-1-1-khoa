@@ -40,4 +40,9 @@ class User extends Model
     {
         return $this->hasMany(BlacklistJWT::class, 'user_id', 'id');
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'users_roles', 'user_id', 'role_id', 'id', 'id');
+    }
 }

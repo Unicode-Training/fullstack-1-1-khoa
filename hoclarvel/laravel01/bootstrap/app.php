@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AuthMiddleware;
+use App\Http\Middleware\CustomHeaderMiddleware;
 use App\Http\Middleware\PermissionMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -15,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         // $middleware->append(AuthMiddleware::class);
+        $middleware->append(CustomHeaderMiddleware::class);
         $middleware->alias([
             'auth' => AuthMiddleware::class,
             'permission' => PermissionMiddleware::class

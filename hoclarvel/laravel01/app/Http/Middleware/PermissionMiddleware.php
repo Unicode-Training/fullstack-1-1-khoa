@@ -14,17 +14,24 @@ class PermissionMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, $name): Response
     {
-        $permission = true;
-        if (!$permission) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Fobidden'
-            ], 403);
+        $user = $request->user;
+        $roles = $user->roles()->with('permissions')->get();
+        $permissionUnique = [];
+        foreach ($roles as $role) {
+            foreach ($role->permissions as $item) {
+                if (!in_array($item->name, $permissionUnique)) {
+                    array_push($permissionUnique, $item->name);
+                }
+            }
         }
-
-        Log::info($request->user);
-        return $next($request);
+        if (in_array($name, $permissionUnique)) {
+            return $next($request);
+        }
+        return response()->json([
+            'success' => false,
+            'Permission deny'
+        ], 403);
     }
 }
