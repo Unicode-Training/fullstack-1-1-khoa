@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\CustomHeaderMiddleware;
 use App\Http\Middleware\PermissionMiddleware;
@@ -19,7 +20,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(CustomHeaderMiddleware::class);
         $middleware->alias([
             'auth' => AuthMiddleware::class,
-            'permission' => PermissionMiddleware::class
+            'permission' => PermissionMiddleware::class,
+            'is_admin' => AdminMiddleware::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

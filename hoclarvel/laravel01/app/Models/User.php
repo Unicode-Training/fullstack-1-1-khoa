@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Model
 {
+    use Notifiable;
     //Tự động ánh xạ tới table
     protected $table = 'users'; //Chủ động khai báo tên table
 

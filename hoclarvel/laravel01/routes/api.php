@@ -1,13 +1,18 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\LoginController;
-use App\Http\Controllers\Api\CourseController;
+use App\Models\Role;
+use Illuminate\Http\Request;
+use Illuminate\Mail\Message;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\UserCourseController;
+use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\UserPostController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Admin\RoleController;
+use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\UserCourseController;
+use App\Mail\SendMailAlertLogin;
 
 Route::prefix('/users')->middleware(['auth', 'permission'])->group(function () {
     Route::get('/', [UserController::class, 'index']);
@@ -58,4 +63,23 @@ Route::prefix('/auth')->group(function () {
 
     Route::post('/refresh-token', [LoginController::class, 'refreshToken']);
     Route::delete('/logout', [LoginController::class, 'logout'])->middleware('auth');
+});
+
+Route::prefix('/admin')->middleware(['auth', 'is_admin'])->group(function () {
+    Route::get('/roles', [RoleController::class, 'index']);
+    Route::post('/roles', [RoleController::class, 'create']);
+    Route::put('/roles/{id}', [RoleController::class, 'update']);
+    Route::delete('/roles/{id}', [RoleController::class, 'delete']);
+
+    Route::put('/roles/{id}/users', [RoleController::class, 'assignUsers']);
+});
+
+Route::get('/test-mail', function () {
+    $name = 'Hoàng An';
+    $user = (object)[
+        'name' => $name,
+        'login_time' => date('Y-m-d H:i:s'),
+        'link' => 'https://unicode.vn/login'
+    ];
+    Mail::to('hoangan.web@gmail.com')->send(new SendMailAlertLogin($user));
 });

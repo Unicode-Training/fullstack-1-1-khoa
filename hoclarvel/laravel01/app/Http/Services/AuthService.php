@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Models\BlacklistJWT;
+use App\Notifications\AlertLoginNotification;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +34,7 @@ class AuthService
                 'message' => 'Unauthenticated'
             ]);
         }
+        $user->notify(new AlertLoginNotification($user));
         return [
             'access_token' => $this->jwtService->createToken($user),
             'refresh_token' => $this->jwtService->createRefreshToken($user)
