@@ -77,3 +77,11 @@ class LoginController extends Controller
         return $this->authService->deleteBlacklistsExpired();
     }
 }
+
+//Viết API đăng ký tài khoản
+
+//POST /api/auth/register
+
+//Sau khi đăng ký thành công --> Dispatch Event: UserRegistered --> Listener gửi email thông báo chúc mừng đăng ký thành công
+
+//Buổi sau: Cache

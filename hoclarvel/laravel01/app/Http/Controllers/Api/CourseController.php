@@ -17,4 +17,19 @@ class CourseController extends Controller
     {
         return $this->courseService->getAll($request);
     }
+
+    public function create(Request $request)
+    {
+        return $this->courseService->create($request);
+    }
+
+    public function detail($id)
+    {
+        return $this->courseService->getOne($id);
+    }
+
+    public function update($id, Request $request)
+    {
+        return $this->courseService->update($id, $request);
+    }
 }

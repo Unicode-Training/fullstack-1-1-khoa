@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\UserPostController;
 use App\Http\Controllers\Api\Admin\RoleController;
 use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\LearnQueueController;
 use App\Http\Controllers\Api\UserCourseController;
 use App\Mail\SendMailAlertLogin;
 
@@ -51,7 +52,10 @@ Route::prefix('/courses')->group(function () {
     Route::get('/', [CourseController::class, 'index']);
     Route::prefix('/{id}')->group(function () {
         Route::get('/users', [UserCourseController::class, 'users']);
+        Route::get('/', [CourseController::class, 'detail']);
+        Route::patch('/', [CourseController::class, 'update']);
     });
+    Route::post('/', [CourseController::class, 'create']);
 });
 
 //path + method (get, post, put, patch, delete)
@@ -82,4 +86,9 @@ Route::get('/test-mail', function () {
         'link' => 'https://unicode.vn/login'
     ];
     Mail::to('hoangan.web@gmail.com')->send(new SendMailAlertLogin($user));
+});
+
+Route::prefix('/learn-queue')->group(function () {
+    Route::post('/dispatch', [LearnQueueController::class, 'dispatchQueue']);
+    Route::post('/create', [LearnQueueController::class, 'create']);
 });
